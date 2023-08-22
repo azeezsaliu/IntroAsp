@@ -1,0 +1,60 @@
+﻿@model Student
+<html>
+<title></title>
+<link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<body>
+
+    <div class="container-fluid p-2 bg-primary text-white text-center">
+        <h1>My First Bootstrap Page</h1>
+        <p>Resize this responsive page to see the effect!</p>
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+        <div class="container-fluid">
+            <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Student/List">List Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Student/Create">Add Student</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </nav>
+
+    <div class="container mt-3">
+        <h2>Add Student</h2>
+        <form action="/Student/Edit" method="post">
+            <div class="mb-3 mt-3">
+                <label for="Id" class="form-label">Id:</label>
+                <input type="number" class="form-control" id="Id" value="@Model.Id" readonly placeholder="Enter Id" name="Id">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="fname" class="form-label">First Name:</label>
+                <input type="text" class="form-control" id="fname" value="@Model.FirstName" placeholder="Enter First Name" name="firstName">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="lname" class="form-label">Last Name:</label>
+                <input type="text" class="form-control" id="lname" value="@Model.LastName" placeholder="Enter Last Name" name="lastName">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" value="@Model.Email" placeholder="Enter email" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">Age:</label>
+                <input type="number" class="form-control" id="age" value="@Model.Age" placeholder="Enter age" name="age">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+
+</body>
+</html>

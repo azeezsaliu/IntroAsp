@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+
+    string name = "Berk";
+
+    string Welcome()
+    {
+        return "John";
+    }
+
+    @:This is comming from Code block;
+
+    int value = 59;
+
+    string message = "<h1>Here is message</h1>";
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h1>Your name is @name</h1>
+
+    <h1>Your name is @Welcome()</h1>
+    
+    @if(value > 10)
+    {
+        <h2>Your name is @name</h2>
+        <h2>The number is greater than 10</h2>
+    }
+    else
+    {
+        <h2>The number is less than 10</h2>
+    }
+
+    @switch(value)
+    {
+        case 1:
+            <h2>The number is 1</h2>
+            break;
+        case 2:
+            <h2>The number is 2</h2>
+            break;
+        default:
+            <h2>Its out of range</h2>
+            break;
+    }
+
+
+    @Html.Raw(message)
+
+
+
+
+
+
+
+
+</div>

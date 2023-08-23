@@ -1,60 +1,40 @@
-﻿
-<html>
-<title></title>
-<link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-<body>
+﻿@model Student
 
-    <div class="container-fluid p-2 bg-primary text-white text-center">
-        <h1>My First Bootstrap Page</h1>
-        <p>Resize this responsive page to see the effect!</p>
-    </div>
-
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-
-        <div class="container-fluid">
-            <!-- Links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/Student/List">List Student</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Student/Create">Add Student</a>
-                </li>
-
-            </ul>
-        </div>
-
-    </nav>
+@{
+    ViewBag.Header = "Elev8 Training Institution";
+    ViewData["Motor"] = "A Training Instute Like No Other";
+}
 
     <div class="container mt-3">
         <h2>Add Student</h2>
-        <form action="/Student/Create" method="post">
+        <form asp-controller="Student" asp-action="Create" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="mb-3 mt-3">
-                <label for="Id" class="form-label">Id:</label>
-                <input type="number" class="form-control" id="Id" readonly placeholder="Enter Id" name="Id">
+                <label asp-for="@Model.Id" class="form-label">Id:</label>
+                <input asp-for="@Model.Id" type="number" class="form-control" readonly placeholder="Enter Id">
+            <div><span asp-validation-for="@Model.Id" class="text-danger"></span></div>
             </div>
             <div class="mb-3 mt-3">
-                <label for="fname" class="form-label">First Name:</label>
-                <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="firstName">
+                <label asp-for="@Model.FirstName" class="form-label">First Name:</label>
+                <input asp-for="@Model.FirstName" type="text" class="form-control" placeholder="Enter First Name">
+            <div><span asp-validation-for="@Model.FirstName" class="text-danger"></span></div>
             </div>
             <div class="mb-3 mt-3">
-                <label for="lname" class="form-label">Last Name:</label>
-                <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="lastName">
+                <label asp-for="@Model.LastName" class="form-label">Last Name:</label>
+                <input asp-for="@Model.LastName" type="text" class="form-control" placeholder="Enter Last Name">
+            <div><span asp-validation-for="@Model.LastName" class="text-danger"></span></div>
             </div>
             <div class="mb-3 mt-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                <label asp-for="@Model.Email" class="form-label">Email:</label>
+                @Html.TextBoxFor(model=>model.Email, new {@class = "form-control", placeholder = "Enter Email"})
+            <div><span asp-validation-for="@Model.Email" class="text-danger"></span></div>
             </div>
             <div class="mb-3">
-                <label for="age" class="form-label">Age:</label>
-                <input type="number" class="form-control" id="age" placeholder="Enter age" name="age">
+                <label asp-for="@Model.Age" class="form-label">Age:</label>
+                @Html.TextBoxFor(model=>model.Age, new {@class = "form-control"})
+            <div><span asp-validation-for="@Model.Age" class="text-danger"></span></div>
             </div>
             
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-
-
-
-</body>
-</html>

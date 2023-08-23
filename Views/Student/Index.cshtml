@@ -1,32 +1,10 @@
-﻿
-<html>
-    <title></title>
-    <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <body>
+﻿@{
+    ViewBag.Header = "Elev8 Training Institution";
+    ViewData["Motor"] = "A Training Instute Like No Other";
 
-    <div class="container-fluid p-2 bg-primary text-white text-center">
-        <h1>@ViewBag.Header</h1>
-        <p>@ViewData["Motor"]</p>
-    </div>
-
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-
-        <div class="container-fluid">
-            <!-- Links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/Student/Display">List Student</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Student/Create">Add Student</a>
-                </li>
-                
-            </ul>
-        </div>
-
-    </nav>
+    Layout = "_Layout";
+}
 
 
 
-</body>
-</html>
+<h1>This Is A Welcome Message</h1>

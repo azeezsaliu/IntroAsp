@@ -1,5 +1,6 @@
 ﻿using Intro.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Intro.Controllers
 {
@@ -15,12 +16,12 @@ namespace Intro.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.Header = "Elev8 Training Institution";
-            ViewData["Motor"] = "A Training Instute Like No Other";
+            //ViewBag.Header = "Elev8 Training Institution";
+            //ViewData["Motor"] = "A Training Instute Like No Other";
             return View();
         }
 
-        public IActionResult Detail(int id)
+        public IActionResult Detail([FromRoute]  int id)
         {
             var stu = from student in studentList
                       where student.Id == id
@@ -39,15 +40,38 @@ namespace Intro.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            Student student = new Student();
+            return View(student);
         }
 
         [HttpPost]
-        public IActionResult Create(string firstName, string lastName, string email, int age)
+        public IActionResult Create([FromForm] Student student)
         {
-            Student student = new Student() { Id = ++studentNo, FirstName = firstName, LastName = lastName, Email = email, Age = age};
-            studentList.Add(student);
-            return View("Display", studentList);
+
+            if (ModelState.IsValid)
+            {
+                /*
+                ModelState.AddModelError(nameof(Student.FirstName), "First name is Compulsory");
+                if (ModelState.GetValidationState(nameof(Student.FirstName)) != ModelValidationState.Valid)
+                {
+                    ModelState.AddModelError(nameof(Student.FirstName), "First name is Compulsory");
+                }
+                if (ModelState.GetValidationState("LastName") != ModelValidationState.Valid)
+                {
+                    ModelState.AddModelError("LastName", "Last name is Compulsory");
+                }
+                */
+                //Student student = new Student() { Id = ++studentNo, FirstName = firstName, LastName = lastName, Email = email, Age = age};
+                studentList.Add(student);
+                TempData["Message"] = student.FirstName + " is successfully created";
+                //return View("Display", studentList);
+
+                return RedirectToAction("Display");
+            }
+            else
+            {
+                return View(student);
+            }
             
         }
         [NonAction]
@@ -69,22 +93,22 @@ namespace Intro.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, string firstName, string lastName, string email, int age)
+        public IActionResult Edit(Student studentObj)
         {
             var student = from st in studentList
-                          where st.Id == id
+                          where st.Id == studentObj.Id
                           select st;
 
             Student stu = student.ToList()[0];
 
-            stu.FirstName = firstName;
-            stu.LastName = lastName;
-            stu.Email = email;
-            stu.Age = age;
+            int index = studentList.IndexOf(stu);
 
+            
 
+            studentList.RemoveAt(index);
+            studentList.Insert(index, studentObj);
 
-            return View("Detail", stu);
+            return View("Detail", studentObj);
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Student>;
+
+    <p>A partial View Display</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var stu in Model)
+        {
+            <tr>
+                <td>@stu.Id</td>
+                <td>@stu.FirstName</td>
+                <td>@stu.LastName</td>
+                <td>@stu.Email</td>
+                <td>@stu.Age</td>
+                <td>
+                    <a asp-controller="Student" asp-action="Detail" asp-route-id="@stu.Id" class="btn btn-sm btn-primary">View</a> |
+                    <a asp-controller="Student" asp-action="Edit" asp-route-id="@stu.Id" class="btn btn-sm btn-warning">Edit</a> |
+                    <a asp-controller="Student" asp-action="Delete" asp-route-id="@stu.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
